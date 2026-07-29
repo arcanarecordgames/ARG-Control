@@ -204,3 +204,74 @@ SYSTEM ERROR
 `;
 
 });
+
+const mailList =
+document.getElementById(
+"mailList"
+);
+
+get(
+ref(db,"mail")
+)
+
+.then((snapshot)=>{
+
+    if(!snapshot.exists()){
+
+        mailList.innerHTML =
+        "<p>NO MAIL</p>";
+
+        return;
+
+    }
+
+    const mails =
+    snapshot.val();
+
+    mailList.innerHTML = "";
+    
+Object.keys(mails)
+.reverse()
+.forEach((id)=>{
+
+    const mail =
+    mails[id];
+
+    if(
+    !mail.receivers.includes(
+    member.member_id
+    )
+    ){
+        return;
+    }
+
+    mailList.innerHTML += `
+
+<div class="mail-card"
+onclick="location.href='mail-detail.html?id=${id}'">
+
+<h3>
+${mail.subject}
+</h3>
+
+<p>
+FROM :
+${mail.sender}
+</p>
+
+</div>
+
+`;
+
+});
+
+})
+
+.catch((error)=>{
+
+    console.error(error);
+
+    mailList.innerHTML =
+    "<p>SYSTEM ERROR</p>";
+
+});
