@@ -72,3 +72,46 @@ document.getElementById(
 ).textContent =
 
 member.status;
+// ADMIN PANEL CONTROL
+
+
+const adminPanel =
+
+document.getElementById(
+"adminPanel"
+);
+
+
+
+if(adminPanel){
+
+
+if(member.access_level >= 4){
+
+
+adminPanel.style.display =
+"block";
+
+
+
+adminPanel.onclick = function(){
+
+
+location.href =
+"admin.html";
+
+
+};
+
+
+}else{
+
+
+adminPanel.style.display =
+"none";
+
+
+}
+
+
+}
