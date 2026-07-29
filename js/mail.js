@@ -73,7 +73,7 @@ if(snapshot.exists()){
 
 
 
-const mails =
+const mail =
 snapshot.val();
 
 
@@ -83,12 +83,12 @@ mailList.innerHTML = "";
 
 
 
-Object.keys(mails).forEach(
+Object.keys(mail).forEach(
 (id)=>{
 
 
 const mail =
-mails[id];
+mail[id];
 
 
 
