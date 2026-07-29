@@ -160,6 +160,20 @@ member.status !== "active"
 
 if(member.status === "locked"){
 
+
+await createLoginLog({
+
+member_id: memberID,
+
+result:
+"ACCOUNT LOCKED",
+
+time:
+new Date().toISOString()
+
+});
+
+
 message.innerHTML =
 "ACCOUNT LOCKED";
 
