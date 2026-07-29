@@ -60,7 +60,7 @@ get(
 
 ref(
 db,
-"mails"
+"mail"
 )
 
 )
@@ -135,7 +135,7 @@ ${mail.subject}
 
 <td>
 
-${mail.created_at}
+${new Date(mail.time).toLocaleString()}
 
 </td>
 
