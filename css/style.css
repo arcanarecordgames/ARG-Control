@@ -606,9 +606,16 @@ h1 {
     word-break: break-word;
 
 }
-/* MID Link */
+/* ===== Table Link Fix ===== */
 
-.member-link {
+
+.member-table a {
+
+    display:block;
+
+    width:100%;
+
+    height:100%;
 
     color:#00ffff;
 
@@ -617,26 +624,10 @@ h1 {
 }
 
 
-/* Management Link */
-
-.manage-link {
-
-    color:#00ffff;
-
-    text-decoration:none;
-
-    transition:0.3s;
-
-}
-
-
-.manage-link:hover {
+.member-table a:hover {
 
     background:#00ffff;
 
     color:#000;
-
-    box-shadow:
-    0 0 10px #00ffff;
 
 }
