@@ -591,18 +591,7 @@ h1 {
 
 
 
-.member-table a:hover {
 
-    background:
-    #00ffff;
-
-    color:
-    #000;
-
-    box-shadow:
-    0 0 10px #00ffff;
-
-}
 /* ===== Member Table Border Fix ===== */
 
 .member-table th,
@@ -628,15 +617,9 @@ h1 {
 }
 
 
-/* Management Button */
+/* Management Link */
 
 .manage-link {
-
-    display:inline-block;
-
-    padding:6px 15px;
-
-    border:1px solid #00ffff;
 
     color:#00ffff;
 
