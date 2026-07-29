@@ -97,11 +97,11 @@ mails[id];
 // 自分宛確認
 
 if(
+!mail.receivers ||
+!Array.isArray(mail.receivers) ||
 !mail.receivers.includes(member.member_id)
 ){
-
-return;
-
+    return;
 }
 
 
