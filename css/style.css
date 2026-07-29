@@ -567,6 +567,8 @@ h1 {
 
     max-width: 100%;
 
+    table-layout: fixed;
+
 }
 
 
