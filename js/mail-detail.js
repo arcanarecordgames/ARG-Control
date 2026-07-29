@@ -105,7 +105,7 @@ get(
 
 ref(
 db,
-"mails/" + mailID
+"mail/" + mailID
 )
 
 )
