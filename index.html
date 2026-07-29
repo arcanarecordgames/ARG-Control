@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+ARG Control | Authentication
+</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="auth-container">
+
+
+<div class="logo-area">
+
+<h1>
+ARG Control
+</h1>
+
+<p>
+Arcana Record Games
+</p>
+
+</div>
+
+
+
+<div class="auth-box">
+
+
+<h2>
+AUTHENTICATION REQUIRED
+</h2>
+
+
+<p class="status">
+SYSTEM ONLINE
+</p>
+
+
+
+<label>
+Member ID
+</label>
+
+<input
+type="text"
+id="memberID"
+placeholder="ARG-00001"
+autocomplete="username"
+>
+
+
+
+<label>
+Password
+</label>
+
+<input
+type="password"
+id="password"
+placeholder="PASSWORD"
+autocomplete="current-password"
+>
+
+
+
+<button onclick="login()">
+LOGIN
+</button>
+
+
+
+<p id="message"></p>
+
+
+</div>
+
+
+
+<div class="footer">
+
+ARG CONTROL SYSTEM
+<br>
+AUTHORIZED MEMBERS ONLY
+
+</div>
+
+
+</div>
+
+
+
+<script src="js/auth.js"></script>
+
+
+</body>
+
+</html>
