@@ -113,6 +113,7 @@ sendAll.onchange = ()=>{
 sendButton.onclick = async ()=>{
 
     const receivers = [];
+    const receiverNames = [];
 
     if(sendAll.checked){
 
