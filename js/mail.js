@@ -97,7 +97,7 @@ mails[id];
 // 自分宛確認
 
 if(
-mail.receiver !== member.member_id
+!mail.receivers.includes(member.member_id)
 ){
 
 return;
