@@ -1,0 +1,186 @@
+// =================================
+// ARG Control
+// Authentication System
+// =================================
+
+
+import { db } 
+from "./firebase-config.js";
+
+
+import {
+
+ref,
+get
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+import {
+
+hashPassword
+
+}
+
+from "./security.js";
+
+
+
+
+
+window.login = async function(){
+
+
+
+const memberID =
+
+document.getElementById(
+"memberID"
+).value;
+
+
+
+const password =
+
+document.getElementById(
+"password"
+).value;
+
+
+
+const message =
+
+document.getElementById(
+"message"
+);
+
+
+
+
+
+try {
+
+
+
+const snapshot =
+
+await get(
+
+ref(
+db,
+"members/" + memberID
+)
+
+);
+
+
+
+
+
+if(!snapshot.exists()){
+
+
+message.innerHTML =
+"MEMBER ID NOT FOUND";
+
+
+return;
+
+}
+
+
+
+
+
+const member =
+
+snapshot.val();
+
+
+
+
+
+const hashedPassword =
+
+await hashPassword(password);
+
+
+
+
+
+if(
+hashedPassword !== member.password_hash
+){
+
+
+message.innerHTML =
+"PASSWORD ERROR";
+
+
+return;
+
+
+}
+
+
+
+
+
+if(
+member.status !== "active"
+){
+
+
+message.innerHTML =
+"ACCOUNT LOCKED";
+
+
+return;
+
+}
+
+
+
+
+
+
+localStorage.setItem(
+
+"ARG_MEMBER",
+
+JSON.stringify(member)
+
+);
+
+
+
+
+
+location.href =
+"dashboard.html";
+
+
+
+
+
+}
+
+catch(error){
+
+
+console.error(error);
+
+
+message.innerHTML =
+"SYSTEM ERROR";
+
+
+}
+
+
+
+}
