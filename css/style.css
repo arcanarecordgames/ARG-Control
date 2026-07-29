@@ -630,3 +630,11 @@ h1 {
     0 0 10px #00ffff;
 
 }
+/* ===== Member Table Border Fix ===== */
+
+.member-table th,
+.member-table td {
+
+    border: 1px solid #00ffff;
+
+}
