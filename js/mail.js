@@ -182,26 +182,19 @@ NO MAIL
 
 })
 
-.catch(
-(error)=>{
+.catch((error)=>{
 
+    console.error(error);
 
-console.error(error);
+    alert(error.message);
 
-
-mailList.innerHTML = `
-
-<tr>
-
-<td colspan="4">
-
-SYSTEM ERROR
-
-</td>
-
-</tr>
-
-`;
+    mailList.innerHTML = `
+    <tr>
+        <td colspan="4">
+        SYSTEM ERROR
+        </td>
+    </tr>
+    `;
 
 });
 
