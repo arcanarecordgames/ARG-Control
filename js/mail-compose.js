@@ -42,3 +42,70 @@ if(Number(member.access_level) < 4){
     "dashboard.html";
 
 }
+
+const receiverSelect =
+document.getElementById(
+"receiverSelect"
+);
+
+const sendAll =
+document.getElementById(
+"sendAll"
+);
+
+const subject =
+document.getElementById(
+"subject"
+);
+
+const body =
+document.getElementById(
+"body"
+);
+
+const sendButton =
+document.getElementById(
+"sendButton"
+);
+
+get(
+ref(db,"members")
+)
+
+.then((snapshot)=>{
+
+    if(!snapshot.exists()) return;
+
+    const members =
+    snapshot.val();
+
+    Object.keys(members).forEach((id)=>{
+
+        const data =
+        members[id];
+
+        const option =
+        document.createElement(
+        "option"
+        );
+
+        option.value =
+        id;
+
+        option.textContent =
+        `${data.username} (${id})`;
+
+        receiverSelect.appendChild(
+        option
+        );
+
+    });
+
+});
+
+sendAll.onchange = ()=>{
+
+    receiverSelect.disabled =
+    sendAll.checked;
+
+};
