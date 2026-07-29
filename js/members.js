@@ -112,22 +112,34 @@ ${id}
 
 </td>
 
+
 <td>
 ${data.username}
 </td>
+
 
 <td>
 ${data.access_level}
 </td>
 
+
 <td>
 ${data.status}
 </td>
 
+
+<td>
+
+<a href="account-control.html?id=${id}">
+管理
+</a>
+
+</td>
+
+
 </tr>
 
 `;
-
 
 
 });
