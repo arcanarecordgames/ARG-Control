@@ -115,7 +115,7 @@ mailList.innerHTML += `
 
 <td>
 
-${mail.sender}
+${mail.senderName}
 
 </td>
 
