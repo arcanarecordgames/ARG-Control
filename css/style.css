@@ -651,3 +651,38 @@ textarea {
     font-family:inherit;
 
 }
+
+/* ===== Mail ===== */
+
+textarea{
+
+    width:100%;
+
+    background:#050505;
+
+    color:white;
+
+    border:1px solid #00ffff;
+
+    padding:14px;
+
+    resize:vertical;
+
+    font-family:inherit;
+
+    margin-bottom:20px;
+
+}
+
+textarea:focus{
+
+    box-shadow:
+    0 0 10px #00ffff;
+
+}
+
+#receiverSelect{
+
+    height:180px;
+
+}
