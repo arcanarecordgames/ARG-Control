@@ -631,3 +631,23 @@ h1 {
     color:#000;
 
 }
+
+textarea {
+
+    width:100%;
+
+    padding:14px;
+
+    margin:10px 0 20px;
+
+    background:#050505;
+
+    color:white;
+
+    border:1px solid #00ffff;
+
+    outline:none;
+
+    font-family:inherit;
+
+}
