@@ -105,7 +105,11 @@ memberList.innerHTML += `
 <tr>
 
 <td>
+
+<a href="member-detail.html?id=${id}">
 ${id}
+</a>
+
 </td>
 
 <td>
