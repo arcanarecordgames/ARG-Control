@@ -129,12 +129,24 @@ hashedPassword !== member.password_hash
 ){
 
 
+await createLoginLog({
+
+member_id: memberID,
+
+result:
+"PASSWORD ERROR",
+
+time:
+new Date().toISOString()
+
+});
+
+
 message.innerHTML =
 "PASSWORD ERROR";
 
 
 return;
-
 
 }
 
