@@ -106,7 +106,7 @@ memberList.innerHTML += `
 
 <td>
 
-<a href="member-detail.html?id=${id}">
+<a class="member-link" href="member-detail.html?id=${id}">
 ${id}
 </a>
 
@@ -130,7 +130,7 @@ ${data.status}
 
 <td>
 
-<a href="account-control.html?id=${id}">
+<a class="manage-link" href="account-control.html?id=${id}">
 管理
 </a>
 
