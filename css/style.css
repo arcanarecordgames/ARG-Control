@@ -549,3 +549,42 @@ h1 {
     width: 25%;
 
 }
+
+/* Mobile Table Fix */
+
+.member-table {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+}
+
+
+.member-table table {
+
+    width: 100%;
+
+    max-width: 100%;
+
+}
+
+
+.admin-container {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+}
+
+.member-table td,
+.member-table th {
+
+    font-size: 14px;
+
+    overflow-wrap: break-word;
+
+}
