@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+ARG Control | Admin Panel
+</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="admin-container">
+
+
+
+<header class="admin-header">
+
+
+<h1>
+ARG Control
+</h1>
+
+
+<p>
+ADMIN CONTROL PANEL
+</p>
+
+
+<div class="system-status">
+
+STATUS :
+<span>
+ONLINE
+</span>
+
+</div>
+
+
+</header>
+
+
+
+
+
+<section class="admin-info">
+
+
+<h2>
+ADMINISTRATOR ACCESS
+</h2>
+
+
+<div class="admin-data">
+
+
+<p>
+CURRENT USER :
+<span id="adminName">
+-
+</span>
+</p>
+
+
+<p>
+MEMBER ID :
+<span id="adminID">
+-
+</span>
+</p>
+
+
+<p>
+ACCESS LEVEL :
+<span id="adminLevel">
+-
+</span>
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<section class="admin-menu">
+
+
+<h2>
+SYSTEM MANAGEMENT
+</h2>
+
+
+
+<div class="admin-grid">
+
+
+
+<div class="admin-card"
+onclick="location.href='register.html'">
+
+
+<h3>
+CREATE MEMBER
+</h3>
+
+
+<p>
+Issue New Account
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="admin-card">
+
+
+<h3>
+MEMBER LIST
+</h3>
+
+
+<p>
+Manage Members
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="admin-card">
+
+
+<h3>
+ACCOUNT CONTROL
+</h3>
+
+
+<p>
+Lock / Unlock Account
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="admin-card">
+
+
+<h3>
+ACCESS LEVEL</h3>
+
+
+<p>
+Permission Management
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="admin-card">
+
+
+<h3>
+LOGIN LOG
+</h3>
+
+
+<p>
+Authentication History
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="admin-card">
+
+
+<h3>
+SYSTEM SETTINGS
+</h3>
+
+
+<p>
+ARG Control Configuration
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<section class="member-table">
+
+
+<h2>
+MEMBER DATABASE
+</h2>
+
+
+<table>
+
+
+<tr>
+
+<th>
+Member ID
+</th>
+
+<th>
+Username
+</th>
+
+<th>
+Level
+</th>
+
+<th>
+Status
+</th>
+
+</tr>
+
+
+
+<tbody id="memberList">
+
+
+<tr>
+
+<td colspan="4">
+NO DATA
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<footer>
+
+
+<p>
+ARG CONTROL SYSTEM
+</p>
+
+
+<p>
+ADMINISTRATOR ACCESS ONLY
+</p>
+
+
+</footer>
+
+
+
+
+
+</div>
+
+
+
+<script src="js/admin.js"></script>
+
+
+</body>
+
+
+</html>
