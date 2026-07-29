@@ -11,7 +11,9 @@ from "./firebase-config.js";
 import {
 
 ref,
-get
+get,
+push,
+set
 
 }
 
@@ -29,7 +31,18 @@ hashPassword
 from "./security.js";
 
 
+async function createLoginLog(data){
 
+const logRef =
+push(ref(db,"login_logs"));
+
+
+await set(
+logRef,
+data
+);
+
+}
 
 
 window.login = async function(){
