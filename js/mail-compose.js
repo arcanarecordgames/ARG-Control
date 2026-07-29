@@ -138,14 +138,18 @@ sendButton.onclick = async ()=>{
     }else{
 
         Array.from(
-            receiverSelect.selectedOptions
-        ).forEach((option)=>{
+    receiverSelect.selectedOptions
+).forEach((option)=>{
 
-            receivers.push(
-                option.value
-            );
+    receivers.push(
+        option.value
+    );
 
-        });
+    receiverNames.push(
+        option.textContent
+    );
+
+});
 
     }
 
@@ -166,25 +170,30 @@ sendButton.onclick = async ()=>{
 
     await set(mailRef,{
 
-        sender:
-        member.member_id,
+    sender:
+    member.member_id,
 
-        receivers:
-        receivers,
+    senderName:
+    member.username,
 
-        subject:
-        subject.value,
+    receivers:
+    receivers,
 
-        body:
-        body.value,
+    receiverNames:
+    receiverNames,
 
-        time:
-        Date.now(),
+    subject:
+    subject.value,
 
-        read:{}
+    body:
+    body.value,
 
-    });
+    time:
+    Date.now(),
 
+    read:{}
+
+});
     alert(
     "MAIL SENT"
     );
