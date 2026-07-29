@@ -194,6 +194,20 @@ message.innerHTML =
 
 else if(member.status === "suspended"){
 
+
+await createLoginLog({
+
+member_id: memberID,
+
+result:
+"ACCOUNT SUSPENDED",
+
+time:
+new Date().toISOString()
+
+});
+
+
 message.innerHTML =
 
 "ACCOUNT SUSPENDED";
@@ -213,7 +227,20 @@ return;
 }
 
 
+await createLoginLog({
 
+member_id: memberID,
+
+username:
+member.username,
+
+result:
+"LOGIN SUCCESS",
+
+time:
+new Date().toISOString()
+
+});
 
 
 
