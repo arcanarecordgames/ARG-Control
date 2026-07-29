@@ -127,13 +127,12 @@ snapshot.val();
 // 宛先確認
 
 if(
-mail.receiver !== member.member_id
+!mail.receivers.includes(member.member_id)
 ){
 
 alert(
 "ACCESS DENIED"
 );
-
 
 location.href =
 "mail.html";
