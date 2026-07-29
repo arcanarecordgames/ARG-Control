@@ -617,3 +617,43 @@ h1 {
     word-break: break-word;
 
 }
+/* MID Link */
+
+.member-link {
+
+    color:#00ffff;
+
+    text-decoration:none;
+
+}
+
+
+/* Management Button */
+
+.manage-link {
+
+    display:inline-block;
+
+    padding:6px 15px;
+
+    border:1px solid #00ffff;
+
+    color:#00ffff;
+
+    text-decoration:none;
+
+    transition:0.3s;
+
+}
+
+
+.manage-link:hover {
+
+    background:#00ffff;
+
+    color:#000;
+
+    box-shadow:
+    0 0 10px #00ffff;
+
+}
