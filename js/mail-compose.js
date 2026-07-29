@@ -109,3 +109,82 @@ sendAll.onchange = ()=>{
     sendAll.checked;
 
 };
+
+sendButton.onclick = async ()=>{
+
+    const receivers = [];
+
+    if(sendAll.checked){
+
+        const snapshot =
+        await get(
+            ref(db,"members")
+        );
+
+        const members =
+        snapshot.val();
+
+        Object.keys(members).forEach((id)=>{
+
+            receivers.push(id);
+
+        });
+
+    }else{
+
+        Array.from(
+            receiverSelect.selectedOptions
+        ).forEach((option)=>{
+
+            receivers.push(
+                option.value
+            );
+
+        });
+
+    }
+
+    if(receivers.length === 0){
+
+        alert(
+        "宛先を選択してください"
+        );
+
+        return;
+
+    }
+
+    const mailRef =
+    push(
+        ref(db,"mail")
+    );
+
+    await set(mailRef,{
+
+        sender:
+        member.member_id,
+
+        receivers:
+        receivers,
+
+        subject:
+        subject.value,
+
+        body:
+        body.value,
+
+        time:
+        Date.now(),
+
+        read:{}
+
+    });
+
+    alert(
+    "MAIL SENT"
+    );
+
+    location.href =
+    "mail.html";
+
+};
