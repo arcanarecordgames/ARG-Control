@@ -134,6 +134,7 @@ if(
 member.status !== "active"
 ){
 
+if(member.status === "locked"){
 
 message.innerHTML =
 "ACCOUNT LOCKED";
