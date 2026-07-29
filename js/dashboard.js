@@ -86,7 +86,7 @@ document.getElementById(
 if(adminPanel){
 
 
-if(member.access_level >= 4){
+if(Number(member.access_level) >= 4){
 
 
 adminPanel.style.display =
