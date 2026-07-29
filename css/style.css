@@ -491,3 +491,61 @@ h1 {
 
 
 }
+
+/* MEMBER TABLE */
+
+.member-table table {
+
+    width: 100%;
+
+    table-layout: fixed;
+
+    border-collapse: collapse;
+
+}
+
+
+.member-table th,
+.member-table td {
+
+    padding: 10px;
+
+    text-align: center;
+
+    word-break: break-word;
+
+}
+
+
+/* Column Size */
+
+.member-table th:nth-child(1),
+.member-table td:nth-child(1) {
+
+    width: 30%;
+
+}
+
+
+.member-table th:nth-child(2),
+.member-table td:nth-child(2) {
+
+    width: 25%;
+
+}
+
+
+.member-table th:nth-child(3),
+.member-table td:nth-child(3) {
+
+    width: 20%;
+
+}
+
+
+.member-table th:nth-child(4),
+.member-table td:nth-child(4) {
+
+    width: 25%;
+
+}
