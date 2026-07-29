@@ -138,6 +138,23 @@ member.status !== "active"
 message.innerHTML =
 "ACCOUNT LOCKED";
 
+}
+
+else if(member.status === "suspended"){
+
+message.innerHTML =
+
+"ACCOUNT SUSPENDED";
+
+}
+
+else{
+
+message.innerHTML =
+
+"ACCOUNT UNAVAILABLE";
+
+}
 
 return;
 
