@@ -588,23 +588,7 @@ h1 {
     overflow-wrap: break-word;
 
 }
-/* ===== Management Link Button ===== */
 
-.member-table a {
-
-    display: inline-block;
-
-    padding: 6px 15px;
-
-    border: 1px solid #00ffff;
-
-    color: #00ffff;
-
-    text-decoration: none;
-
-    transition: 0.3s;
-
-}
 
 
 .member-table a:hover {
