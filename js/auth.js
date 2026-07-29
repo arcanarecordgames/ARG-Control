@@ -84,6 +84,19 @@ db,
 if(!snapshot.exists()){
 
 
+await createLoginLog({
+
+member_id: memberID,
+
+result:
+"MEMBER ID NOT FOUND",
+
+time:
+new Date().toISOString()
+
+});
+
+
 message.innerHTML =
 "MEMBER ID NOT FOUND";
 
@@ -91,7 +104,6 @@ message.innerHTML =
 return;
 
 }
-
 
 
 
