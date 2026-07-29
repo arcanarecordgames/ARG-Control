@@ -177,7 +177,7 @@ memberList.innerHTML = `
 
 <tr>
 
-<td colspan="4">
+<td colspan="5">
 SYSTEM ERROR
 </td>
 
