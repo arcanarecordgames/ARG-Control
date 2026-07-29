@@ -129,6 +129,10 @@ sendButton.onclick = async ()=>{
 
             receivers.push(id);
 
+            receiverNames.push(
+                members[id].username
+            );
+
         });
 
     }else{
