@@ -2,349 +2,101 @@
 <html lang="ja">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>
-ARG Control | Admin Panel
-</title>
-
+<title>ARG Control | Admin Panel</title>
 <link rel="stylesheet" href="css/style.css">
-
 </head>
-
 
 <body>
 
-
 <div class="admin-container">
 
-
-
 <header class="admin-header">
-
-
-<h1>
-ARG Control
-</h1>
-
-
-<p>
-ADMIN CONTROL PANEL
-</p>
-
-
+<h1>ARG Control</h1>
+<p>ADMIN CONTROL PANEL</p>
 <div class="system-status">
-
-STATUS :
-<span>
-ONLINE
-</span>
-
+STATUS : <span>ONLINE</span>
 </div>
-
-
 </header>
 
-
-
-
-
 <section class="admin-info">
-
-
-<h2>
-ADMINISTRATOR ACCESS
-</h2>
-
-
+<h2>ADMINISTRATOR ACCESS</h2>
 <div class="admin-data">
-
-
-<p>
-ユーザー名 :
-<span id="adminName">
--
-</span>
-</p>
-
-
-<p>
-MID :
-<span id="adminID">
--
-</span>
-</p>
-
-
-<p>
-権限レベル :
-<span id="adminLevel">
--
-</span>
-</p>
-
-
+<p>ユーザー名 : <span id="adminName">-</span></p>
+<p>MID : <span id="adminID">-</span></p>
+<p>権限レベル : <span id="adminLevel">-</span></p>
 </div>
-
-
 </section>
 
-
-
-
-
-
 <section class="admin-menu">
-
-
-<h2>
-システム管理
-</h2>
-
-
+<h2>システム管理</h2>
 
 <div class="admin-grid">
 
-
-
-<div class="admin-card"
-onclick="location.href='register.html'">
-
-
-<h3>
-メンバー登録
-</h3>
-
-
-<p>
-新規アカウント発行
-</p>
-
-
+<div class="admin-card" onclick="location.href='register.html'">
+<h3>メンバー登録</h3>
+<p>新規アカウント発行</p>
 </div>
 
-
-
-
-
-
-<div class="admin-card"
-onclick="location.href='members.html'">
-
-<h3>
-メンバーリスト
-</h3>
-
-
-<p>
-登録情報一覧
-</p>
-
-
+<div class="admin-card" onclick="location.href='members.html'">
+<h3>メンバーリスト</h3>
+<p>登録情報一覧</p>
 </div>
 
-
-
-
-
-
-<div class="admin-card"
-onclick="location.href='account-control.html'">
-
-
-<h3>
-アカウント管理
-</h3>
-
-
-<p>
-利用状態制御
-</p>
-
-
+<div class="admin-card" onclick="location.href='account-control.html'">
+<h3>アカウント管理</h3>
+<p>利用状態制御</p>
 </div>
-
-
-
-
-
 
 <div class="admin-card">
-
-
-<h3>
-権限管理</h3>
-
-
-<p>
-アクセス権限設定
-</p>
-
-
+<h3>権限管理</h3>
+<p>アクセス権限設定（近日公開）</p>
 </div>
 
-
-
-
-
-
-<div class="admin-card"
-onclick="location.href='login-log.html'">
-
-
-<h3>
-ログイン履歴
-</h3>
-
-
-<p>
-ログイン記録一覧
-</p>
-
-
+<div class="admin-card" onclick="location.href='login-log.html'">
+<h3>ログイン履歴</h3>
+<p>ログイン記録一覧</p>
 </div>
-
-
-
-
-
 
 <div class="admin-card">
-
-
-<h3>
-システム設定
-</h3>
-
-
-<p>
-ARG Control設定
-</p>
-
-
+<h3>システム設定</h3>
+<p>ARG Control設定（近日公開）</p>
 </div>
 
-<div class="admin-card"
-onclick="location.href='dashboard.html'">
-
-
-<h3>
-ダッシュボードへ戻る
-</h3>
-
-
-<p>
-メイン画面へ移動
-</p>
-
-
+<div class="admin-card" onclick="location.href='dashboard.html'">
+<h3>ダッシュボードへ戻る</h3>
+<p>メイン画面へ移動</p>
 </div>
 
 </div>
-
-
 
 </section>
-
-
-
-
-
-
 
 <section class="member-table">
-
-
-<h2>
-メンバーデータベース
-</h2>
-
-
+<h2>メンバーデータベース</h2>
 <table>
-
-
 <tr>
-
-<th>
-MID
-</th>
-
-<th>
-ユーザー名
-</th>
-
-<th>
-権限レベル
-</th>
-
-<th>
-状態
-</th>
-
+<th>MID</th>
+<th>ユーザー名</th>
+<th>権限レベル</th>
+<th>状態</th>
 </tr>
-
-
-
 <tbody id="memberList">
-
-
-<tr>
-
-<td colspan="4">
-NO DATA
-</td>
-
-
-</tr>
-
-
+<tr><td colspan="4">NO DATA</td></tr>
 </tbody>
-
-
-
 </table>
-
-
-
 </section>
 
-
-
-
-
-
-
-
 <footer>
-
-
-<p>
-ARG CONTROL SYSTEM
-</p>
-
-
-<p>
-ADMINISTRATOR ACCESS ONLY
-</p>
-
-
+<p>ARG CONTROL SYSTEM</p>
+<p>ADMINISTRATOR ACCESS ONLY</p>
 </footer>
 
-
-
-
-
 </div>
-
-
 
 <script type="module" src="js/admin.js"></script>
 
-
 </body>
-
 
 </html>
