@@ -2,293 +2,103 @@
 <html lang="ja">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>
-ARG Control | Dashboard
-</title>
-
+<title>ARG Control | Dashboard</title>
 <link rel="stylesheet" href="css/style.css">
-
 </head>
-
 
 <body>
 
-
 <div class="dashboard-container">
 
-
-
 <header class="dashboard-header">
-
-
 <div>
-
-<h1>
-ARG Control
-</h1>
-
-<p>
-Arcana Record Games Internal System
-</p>
-
+<h1>ARG Control</h1>
+<p>Arcana Record Games Internal System</p>
 </div>
-
-
 <div class="system-status">
-
-STATUS :
-<span>
-ONLINE
-</span>
-
+STATUS : <span>ONLINE</span>
 </div>
-
-
 </header>
 
-
-
-
 <section class="member-panel">
-
-
-<h2>
-MEMBER INFORMATION
-</h2>
-
-
+<h2>MEMBER INFORMATION</h2>
 <div class="member-data">
-
-
-<p>
-USERNAME :
-<span id="username">
--
-</span>
-</p>
-
-
-<p>
-MID :
-<span id="memberID">
--
-</span>
-</p>
-
-
-<p>
-ACCESS LEVEL :
-<span id="accessLevel">
--
-</span>
-</p>
-
-
-<p>
-STATUS :
-<span id="status">
--
-</span>
-</p>
-
-
+<p>USERNAME : <span id="username">-</span></p>
+<p>MID : <span id="memberID">-</span></p>
+<p>ACCESS LEVEL : <span id="accessLevel">-</span></p>
+<p>STATUS : <span id="status">-</span></p>
 </div>
-
-
 </section>
 
-
-
-
+<section class="member-panel" id="announcementSection" style="display:none;">
+<h2>ANNOUNCEMENT</h2>
+<p id="announcementText" style="white-space:pre-wrap;"></p>
+</section>
 
 <section class="control-panel">
-
-
-<h2>
-CONTROL CENTER
-</h2>
-
-
+<h2>CONTROL CENTER</h2>
 
 <div class="menu-grid">
 
-
-
-<div class="menu-card">
-
-<h3>
-PROJECTS
-</h3>
-
-<p>
-プロジェクト管理
-</p>
-
+<div class="menu-card" onclick="location.href='projects.html'">
+<h3>PROJECTS</h3>
+<p>企画投稿</p>
 </div>
 
-
-
-<div class="menu-card">
-
-<h3>
-TASKS
-</h3>
-
-<p>
-タスク管理
-</p>
-
+<div class="menu-card" onclick="location.href='tasks.html'">
+<h3>TASKS</h3>
+<p>タスク管理</p>
 </div>
 
-
-
-
-<div class="menu-card">
-
-<h3>
-RECORDS
-</h3>
-
-<p>
-記録データ
-</p>
-
+<div class="menu-card" onclick="location.href='records.html'">
+<h3>RECORDS</h3>
+<p>記録データ</p>
 </div>
 
-
-
-
-<div class="menu-card">
-
-<h3>
-FILES
-</h3>
-
-<p>
-ファイル管理
-</p>
-
+<div class="menu-card" onclick="location.href='files.html'">
+<h3>FILES</h3>
+<p>ファイル管理</p>
 </div>
 
-
-
-
-<div class="menu-card"
-onclick="location.href='mail.html'">
-
-<h3>
-MAIL
-</h3>
-
-<p>
-チーム内メール
-</p>
-
+<div class="menu-card" onclick="location.href='mail.html'">
+<h3>MAIL</h3>
+<p>チーム内メール</p>
 </div>
 
-
-
-
-<div class="menu-card">
-
-<h3>
-MEMBERS
-</h3>
-
-<p>
-メンバー管理
-</p>
-
+<div class="menu-card" onclick="location.href='members.html'">
+<h3>MEMBERS</h3>
+<p>メンバー管理</p>
 </div>
 
-
-
-
-<div class="menu-card">
-
-<h3>
-SYSTEM LOG
-</h3>
-
-<p>
-システムログ
-</p>
-
+<div class="menu-card" onclick="location.href='login-log.html'">
+<h3>SYSTEM LOG</h3>
+<p>システムログ</p>
 </div>
 
-
-
-
-<div class="menu-card">
-
-<h3>
-SETTINGS
-</h3>
-
-<p>
-設定
-</p>
-
+<div class="menu-card" onclick="location.href='settings.html'">
+<h3>SETTINGS</h3>
+<p>設定</p>
 </div>
 
-
-<div class="menu-card"
-id="adminPanel"
-style="display:none;">
-
-
-<h3>
-管理者管理画面
-</h3>
-
-
-<p>
-管理者専用システム
-</p>
-
+<div class="menu-card" id="adminPanel" style="display:none;">
+<h3>管理者管理画面</h3>
+<p>管理者専用システム</p>
 </div>
 
 </div>
-
-
 </section>
 
-
-
-
-
-
 <footer>
-
-
-<p>
-ARG CONTROL SYSTEM
-</p>
-
-
-<p>
-AUTHORIZED ACCESS ONLY
-</p>
-
-
+<p>ARG CONTROL SYSTEM</p>
+<p>AUTHORIZED ACCESS ONLY</p>
 </footer>
 
-
-
-
 </div>
-
-
 
 <script type="module" src="js/dashboard.js"></script>
 
-
 </body>
-
 
 </html>
