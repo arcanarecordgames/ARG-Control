@@ -2,184 +2,64 @@
 <html lang="ja">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>
-ARG Control | Member Detail
-</title>
-
-
+<title>ARG Control | Member Detail</title>
 <link rel="stylesheet" href="css/style.css">
-
 </head>
-
 
 <body>
 
-
 <div class="admin-container">
 
-
 <header class="admin-header">
-
-
-<h1>
-ARG Control
-</h1>
-
-
-<p>
-MEMBER INFORMATION SYSTEM
-</p>
-
-
+<h1>ARG Control</h1>
+<p>MEMBER INFORMATION SYSTEM</p>
 <div class="system-status">
-
-STATUS :
-<span>
-ONLINE
-</span>
-
+STATUS : <span>ONLINE</span>
 </div>
-
-
 </header>
 
-
-
-
-
 <section class="admin-info">
-
-
-<h2>
-MEMBER INFORMATION
-</h2>
-
-
-
+<h2>MEMBER INFORMATION</h2>
 <div class="admin-data">
-
-
-<p>
-MEMBER ID :
-<span id="memberID">
--
-</span>
-</p>
-
-
-<p>
-USERNAME :
-<span id="username">
--
-</span>
-</p>
-
-
-<p>
-ACCESS LEVEL :
-<span id="accessLevel">
--
-</span>
-</p>
-
-
-<p>
-STATUS :
-<span id="status">
--
-</span>
-</p>
-
-
+<p>MEMBER ID : <span id="memberID">-</span></p>
+<p>USERNAME : <span id="username">-</span></p>
+<p>ACCESS LEVEL : <span id="accessLevel">-</span></p>
+<p>STATUS : <span id="status">-</span></p>
 </div>
-
-
 </section>
-
-
-
-
 
 <section class="admin-menu">
-
-
-<h2>
-CONTROL
-</h2>
-
-
+<h2>CONTROL</h2>
 <div class="admin-grid">
 
-
-
-<div class="admin-card"
-onclick="location.href='member-edit.html?id=' + new URLSearchParams(location.search).get('id')">
-
-<h3>
-EDIT MEMBER
-</h3>
-
-<p>
-Modify Information
-</p>
-
+<div class="admin-card" onclick="location.href='member-edit.html?id=' + new URLSearchParams(location.search).get('id')">
+<h3>EDIT MEMBER</h3>
+<p>Modify Information</p>
 </div>
 
-
-
-
-<div class="admin-card"
-onclick="location.href='account-control.html?id=' + new URLSearchParams(location.search).get('id')">
-
-<h3>
-ACCOUNT CONTROL
-</h3>
-
-<p>
-Lock / Unlock
-</p>
-
+<div class="admin-card" onclick="location.href='account-control.html?id=' + new URLSearchParams(location.search).get('id')">
+<h3>ACCOUNT CONTROL</h3>
+<p>Lock / Unlock</p>
 </div>
 
-
-
+<div class="admin-card" onclick="location.href='members.html'">
+<h3>戻る</h3>
+<p>メンバー一覧へ</p>
 </div>
 
-
+</div>
 </section>
 
-
-
-
-
-
 <footer>
-
-<p>
-ARG CONTROL SYSTEM
-</p>
-
-<p>
-ADMINISTRATOR ACCESS ONLY
-</p>
-
+<p>ARG CONTROL SYSTEM</p>
+<p>ADMINISTRATOR ACCESS ONLY</p>
 </footer>
-
-
 
 </div>
 
-
-
-
 <script type="module" src="js/member-detail.js"></script>
-
 
 </body>
 
