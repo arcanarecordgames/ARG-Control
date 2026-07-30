@@ -2,187 +2,56 @@
 <html lang="ja">
 
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>
-ARG Control | Member Registration
-</title>
-
+<title>ARG Control | Member Registration</title>
 <link rel="stylesheet" href="css/style.css">
-
 </head>
-
 
 <body>
 
-
 <div class="register-container">
 
-
-
 <header class="register-header">
-
-<h1>
-ARG Control
-</h1>
-
-<p>
-MEMBER REGISTRATION SYSTEM
-</p>
-
+<h1>ARG Control</h1>
+<p>MEMBER REGISTRATION SYSTEM</p>
 </header>
 
-
-
-
-
 <section class="register-box">
+<h2>CREATE MEMBER</h2>
+<p class="system-status">ADMINISTRATOR ONLY</p>
 
+<label>Username</label>
+<input type="text" id="username" placeholder="Member Name">
 
-<h2>
-CREATE MEMBER
-</h2>
+<label>Password</label>
+<input type="password" id="password" placeholder="Password">
 
-
-<p class="system-status">
-ADMINISTRATOR ONLY
-</p>
-
-
-
-
-
-<label>
-Username
-</label>
-
-<input
-type="text"
-id="username"
-placeholder="Member Name"
->
-
-
-
-
-<label>
-Password
-</label>
-
-<input
-type="password"
-id="password"
-placeholder="Password"
->
-
-
-
-
-<label>
-Access Level
-</label>
-
-
+<label>Access Level</label>
 <select id="accessLevel">
-
-
-<option value="1">
-LEVEL 1 - TESTER
-</option>
-
-
-<option value="2">
-LEVEL 2 - DEVELOPER
-</option>
-
-
-<option value="3">
-LEVEL 3 - LEADER
-</option>
-
-
-<option value="4">
-LEVEL 4 - ADMINISTRATOR
-</option>
-
-
-<option value="5">
-LEVEL 5 - FOUNDER
-</option>
-
-
+<option value="5">5 - ADMIN</option>
+<option value="4">4 - MANAGER</option>
+<option value="3">3 - STAFF</option>
+<option value="2" selected>2 - MEMBER</option>
+<option value="1">1 - GUEST</option>
 </select>
 
+<button onclick="createMember()">CREATE MEMBER</button>
 
-
-
-
-<label>
-Invitation Code
-</label>
-
-
-<input
-type="text"
-id="inviteCode"
-placeholder="INVITE-XXXX"
->
-
-
-
-
-
-
-<button onclick="createMember()">
-
-CREATE MEMBER
-
-</button>
-
-
-
-
-
-<div id="result">
-
-
-</div>
-
-
+<div id="result"></div>
 
 </section>
 
-
-
-
-
-
 <footer>
-
 ARG CONTROL SYSTEM
-
 <br>
-
 AUTHORIZED ACCESS ONLY
-
-
 </footer>
-
-
-
 
 </div>
 
-
-
-
 <script type="module" src="js/register.js"></script>
 
-
 </body>
-
 
 </html>
