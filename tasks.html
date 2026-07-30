@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARG Control | Tasks</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<header class="admin-header">
+<h1>ARG Control</h1>
+<p>TASK SYSTEM</p>
+<div class="system-status">
+STATUS : <span>ONLINE</span>
+</div>
+</header>
+
+<section class="member-table">
+<h2>CALENDAR</h2>
+
+<div class="calendar-header">
+<button id="prevMonth">&lt; PREV</button>
+<h3 id="calendarHeader">-</h3>
+<button id="nextMonth">NEXT &gt;</button>
+</div>
+
+<div class="calendar-grid" id="calendarGrid"></div>
+
+</section>
+
+<section class="member-table">
+<h2>TASK LIST</h2>
+
+<button id="newButton" style="margin-bottom:20px;">NEW TASK</button>
+
+<p>
+<span id="filterLabel">すべてのタスク</span>
+<button id="clearFilterButton" style="display:none;width:auto;padding:6px 14px;margin-left:10px;">絞り込み解除</button>
+</p>
+
+<table>
+<tr>
+<th style="width:8%;">DONE</th>
+<th>TITLE</th>
+<th>ASSIGNEE</th>
+<th>DUE DATE</th>
+</tr>
+<tbody id="taskList">
+<tr><td colspan="4">LOADING...</td></tr>
+</tbody>
+</table>
+</section>
+
+<footer>
+<p>ARG CONTROL SYSTEM</p>
+<p>AUTHORIZED ACCESS ONLY</p>
+</footer>
+
+</div>
+
+<script type="module" src="js/tasks.js"></script>
+
+</body>
+
+</html>

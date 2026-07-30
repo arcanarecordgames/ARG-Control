@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARG Control | New Task</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<header class="admin-header">
+<h1>ARG Control</h1>
+<p>NEW TASK</p>
+<div class="system-status">
+STATUS : <span>ONLINE</span>
+</div>
+</header>
+
+<section class="register-box">
+<h2>タスクを作成</h2>
+
+<label>TITLE</label>
+<input type="text" id="title" placeholder="タスク名">
+
+<label>BODY</label>
+<textarea id="body" rows="8" placeholder="内容"></textarea>
+
+<label>DUE DATE</label>
+<input type="date" id="dueDate">
+
+<label>ASSIGNEE</label>
+<select id="assigneeSelect">
+<option value="">未割当</option>
+</select>
+
+<button id="submitButton">CREATE TASK</button>
+
+</section>
+
+<footer>
+<p>ARG CONTROL SYSTEM</p>
+<p>AUTHORIZED ACCESS ONLY</p>
+</footer>
+
+</div>
+
+<script type="module" src="js/task-new.js"></script>
+
+</body>
+
+</html>
