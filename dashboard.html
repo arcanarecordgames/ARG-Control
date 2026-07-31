@@ -28,9 +28,27 @@ STATUS : <span>ONLINE</span>
 </section>
 
 <section class="member-panel">
+<div class="dashboard-news-row">
+
+<div class="dashboard-news-col">
 <h2>NEWS</h2>
 <div id="newsList" class="news-scroll">
 <p style="opacity:0.6;">LOADING...</p>
+</div>
+</div>
+
+<div class="dashboard-datetime-col">
+<h2>日時</h2>
+<div id="dashboardClock" class="dashboard-clock">-</div>
+
+<div class="calendar-header" style="margin-top:15px;">
+<button id="calPrevMonth" style="width:auto;padding:6px 12px;">&lt;</button>
+<h3 id="calHeader" style="margin:0;font-size:15px;">-</h3>
+<button id="calNextMonth" style="width:auto;padding:6px 12px;">&gt;</button>
+</div>
+<div class="calendar-grid" id="dashboardCalendarGrid"></div>
+</div>
+
 </div>
 </section>
 

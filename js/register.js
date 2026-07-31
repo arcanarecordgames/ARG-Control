@@ -19,7 +19,7 @@ import {
     hashPassword
 } from "./security.js";
 
-import { getLoggedInMember, requireAdmin, initHeader } from "./common.js";
+import { getLoggedInMember, requireAdmin, initHeader, logSystemAction } from "./common.js";
 
 // 修正: このページは元々「ADMINISTRATOR ONLY」と表示だけしていたが、
 // JS側に管理者チェックが一切なく、URLを直接開けば誰でも新規メンバーを作成できてしまっていた。
@@ -65,21 +65,36 @@ async function generateUniqueMemberID() {
 }
 
 
-window.createMember = async function () {
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const accessLevelSelect = document.getElementById("accessLevel");
+const createButton = document.getElementById("createButton");
 
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value;
-    const accessLevel = document.getElementById("accessLevel").value;
-    const result = document.getElementById("result");
+const resultModal = document.getElementById("resultModal");
+const resultUsername = document.getElementById("resultUsername");
+const resultMID = document.getElementById("resultMID");
+const resultDate = document.getElementById("resultDate");
+const confirmButton = document.getElementById("confirmButton");
+
+
+createButton.onclick = async () => {
+
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value;
+    const accessLevel = accessLevelSelect.value;
 
     if (username === "" || password === "") {
-        result.innerHTML = "INPUT ERROR";
+        alert("INPUT ERROR");
         return;
     }
+
+    // 連打による重複作成を防止するため、送信中はボタンを無効化する
+    createButton.disabled = true;
 
     try {
 
         const memberID = await generateUniqueMemberID();
+        const createdAt = new Date().toISOString();
 
         const memberData = {
             member_id: memberID,
@@ -89,25 +104,32 @@ window.createMember = async function () {
             password_hash: await hashPassword(password),
             access_level: Number(accessLevel),
             status: "active",
-            created_at: new Date().toISOString(),
+            created_at: createdAt,
             created_by: admin.member_id
         };
 
         await set(ref(db, "members/" + memberID), memberData);
 
-        result.innerHTML = `
-            REGISTRATION COMPLETE
-            <br><br>
-            MEMBER ID :
-            <br>
-            ${memberID}
-        `;
+        await logSystemAction(admin, "MEMBER_REGISTER", `${username} (${memberID})`);
+
+        // 作成完了モーダルを表示し、「確定」を押すまで裏の画面を操作させない
+        resultUsername.textContent = username;
+        resultMID.textContent = memberID;
+        resultDate.textContent = new Date(createdAt).toLocaleString("ja-JP");
+
+        resultModal.classList.add("active");
 
     } catch (error) {
 
         console.error(error);
-        result.innerHTML = "SYSTEM ERROR";
+        alert("SYSTEM ERROR");
+        createButton.disabled = false;
 
     }
 
+};
+
+
+confirmButton.onclick = () => {
+    location.href = "admin.html";
 };

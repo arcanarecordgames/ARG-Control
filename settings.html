@@ -43,6 +43,21 @@ STATUS : <span>ONLINE</span>
 
 <button id="changePasswordButton">CHANGE PASSWORD</button>
 
+<hr>
+
+<label>自動ログアウト（スリープ）までの時間</label>
+<select id="autoLogoutSelect">
+<option value="5">5分</option>
+<option value="10">10分</option>
+<option value="15">15分</option>
+<option value="30">30分</option>
+<option value="60">60分</option>
+</select>
+<p style="font-size:12px;opacity:0.7;margin-top:-10px;">
+一定時間操作が無い場合、自動的にログアウトします（セキュリティのため、この機能をオフにすることはできません）。ログアウトの少し前に画面上で通知が表示されます。
+</p>
+<button id="saveAutoLogoutButton">SAVE</button>
+
 </section>
 
 <section class="register-box">

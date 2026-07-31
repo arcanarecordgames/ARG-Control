@@ -1,6 +1,7 @@
 // =================================
 // ARG Control
 // Account Control System
+// メンバーリストや権限編集に含まれない、アカウント個別の詳細設定
 // =================================
 
 import { db } from "./firebase-config.js";
@@ -11,7 +12,8 @@ import {
     update
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-import { getLoggedInMember, requireAdmin, initHeader } from "./common.js";
+import { hashPassword } from "./security.js";
+import { getLoggedInMember, requireAdmin, initHeader, logSystemAction, tx } from "./common.js";
 
 const admin = getLoggedInMember();
 requireAdmin(admin);
@@ -19,63 +21,124 @@ requireAdmin(admin);
 initHeader();
 
 
-// URLからMID取得
+const memberSelect = document.getElementById("memberSelect");
+const detailArea = document.getElementById("detailArea");
 
-const params = new URLSearchParams(location.search);
-const memberID = params.get("id");
+const detailMID = document.getElementById("detailMID");
+const detailUsername = document.getElementById("detailUsername");
+const detailLevel = document.getElementById("detailLevel");
+const detailStatus = document.getElementById("detailStatus");
+const detailCreatedAt = document.getElementById("detailCreatedAt");
+const detailFailCount = document.getElementById("detailFailCount");
 
-if (!memberID) {
-    alert("MEMBER ID NOT FOUND");
-    location.href = "members.html";
-}
+const newPasswordInput = document.getElementById("newPasswordInput");
+const resetPasswordButton = document.getElementById("resetPasswordButton");
+const resetFailCountButton = document.getElementById("resetFailCountButton");
 
-
-// 表示要素
-
-const idElement = document.getElementById("memberID");
-const currentStatus = document.getElementById("currentStatus");
-const statusSelect = document.getElementById("statusSelect");
-const updateButton = document.getElementById("updateButton");
+let members = {};
+let currentID = "";
 
 
-// 現在情報取得
+// メンバー一覧を取得してプルダウンに反映
 
-get(ref(db, "members/" + memberID))
+get(ref(db, "members"))
     .then((snapshot) => {
 
-        if (!snapshot.exists()) {
-            alert("MEMBER DATA NOT FOUND");
-            location.href = "members.html";
-            return;
-        }
+        if (!snapshot.exists()) return;
 
-        const data = snapshot.val();
+        members = snapshot.val();
 
-        idElement.textContent = memberID;
-        currentStatus.textContent = data.status;
-        statusSelect.value = data.status;
+        Object.keys(members).forEach((id) => {
 
-    });
+            const option = document.createElement("option");
+            option.value = id;
+            option.textContent = `${members[id].username} (${id})`;
 
-
-// STATUS更新
-
-updateButton.onclick = () => {
-
-    const newStatus = statusSelect.value;
-
-    update(ref(db, "members/" + memberID), { status: newStatus })
-        .then(() => {
-
-            alert("STATUS UPDATE COMPLETE");
-            location.href = "member-detail.html?id=" + memberID;
-
-        })
-        .catch((error) => {
-
-            console.error(error);
-            alert("SYSTEM ERROR");
+            memberSelect.appendChild(option);
 
         });
+
+    })
+    .catch((error) => console.error(error));
+
+
+memberSelect.onchange = () => {
+
+    currentID = memberSelect.value;
+
+    if (!currentID) {
+        detailArea.style.display = "none";
+        return;
+    }
+
+    const data = members[currentID];
+
+    detailMID.textContent = currentID;
+    detailUsername.textContent = data.username;
+    detailLevel.textContent = data.access_level;
+    detailStatus.textContent = data.status;
+    detailCreatedAt.textContent = data.created_at ? new Date(data.created_at).toLocaleString("ja-JP") : "-";
+    detailFailCount.textContent = data.failed_login_count || 0;
+
+    newPasswordInput.value = "";
+
+    detailArea.style.display = "block";
+
+};
+
+
+resetPasswordButton.onclick = async () => {
+
+    if (!currentID) return;
+
+    const newPassword = newPasswordInput.value;
+
+    if (newPassword.length < 4) {
+        alert(tx("パスワードは4文字以上にしてください"));
+        return;
+    }
+
+    if (!confirm(tx(`${members[currentID].username} (${currentID}) のパスワードをリセットします。よろしいですか？`))) return;
+
+    try {
+
+        const newHash = await hashPassword(newPassword);
+
+        await update(ref(db, "members/" + currentID), { password_hash: newHash });
+        await logSystemAction(admin, "PASSWORD_FORCE_RESET", `${members[currentID].username} (${currentID})`);
+
+        alert(tx("パスワードをリセットしました"));
+        newPasswordInput.value = "";
+
+    } catch (error) {
+
+        console.error(error);
+        alert("SYSTEM ERROR");
+
+    }
+
+};
+
+
+resetFailCountButton.onclick = async () => {
+
+    if (!currentID) return;
+
+    try {
+
+        await update(ref(db, "members/" + currentID), { failed_login_count: 0 });
+        await logSystemAction(admin, "FAILED_LOGIN_COUNT_RESET", `${members[currentID].username} (${currentID})`);
+
+        detailFailCount.textContent = "0";
+        members[currentID].failed_login_count = 0;
+
+        alert(tx("ログイン失敗回数をリセットしました"));
+
+    } catch (error) {
+
+        console.error(error);
+        alert("SYSTEM ERROR");
+
+    }
 
 };

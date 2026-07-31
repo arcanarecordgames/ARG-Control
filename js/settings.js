@@ -13,7 +13,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import { hashPassword } from "./security.js";
-import { getLoggedInMember, initHeader, isLevel5, applyTheme, getLang, setLang, applyI18n } from "./common.js";
+import { getLoggedInMember, initHeader, isLevel5, applyTheme, getLang, setLang, applyI18n, getAutoLogoutMinutes, setAutoLogoutMinutes, tx } from "./common.js";
 
 const member = getLoggedInMember();
 
@@ -202,6 +202,41 @@ changePasswordButton.onclick = async () => {
         alert("SYSTEM ERROR");
 
     }
+
+};
+
+
+// =================================
+// 自動ログアウト設定（全メンバー共通・オフ不可）
+// =================================
+
+const autoLogoutSelect = document.getElementById("autoLogoutSelect");
+const saveAutoLogoutButton = document.getElementById("saveAutoLogoutButton");
+
+autoLogoutSelect.value = String(getAutoLogoutMinutes());
+
+get(ref(db, "members/" + member.member_id + "/preferences/auto_logout_minutes"))
+    .then((snapshot) => {
+        if (snapshot.exists()) {
+            autoLogoutSelect.value = String(snapshot.val());
+            setAutoLogoutMinutes(snapshot.val());
+        }
+    })
+    .catch((error) => console.error(error));
+
+saveAutoLogoutButton.onclick = async () => {
+
+    const minutes = Number(autoLogoutSelect.value);
+
+    setAutoLogoutMinutes(minutes);
+
+    try {
+        await update(ref(db, "members/" + member.member_id + "/preferences"), { auto_logout_minutes: minutes });
+    } catch (error) {
+        console.error(error);
+    }
+
+    alert(tx("自動ログアウトまでの時間を保存しました。次のページ読み込みから反映されます。"));
 
 };
 

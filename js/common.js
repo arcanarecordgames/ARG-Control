@@ -262,6 +262,11 @@ const UI_TRANSLATIONS_EN = {
     "全メンバー共通・アカウントとこの端末に保存されます": "All members ・ Saved to your account and this device",
     "表示名": "Display Name", "現在のパスワード": "Current Password",
     "新しいパスワード": "New Password", "新しいパスワード（確認）": "New Password (Confirm)",
+    "自動ログアウト（スリープ）までの時間": "Auto-logout (sleep) duration",
+    "一定時間操作が無い場合、自動的にログアウトします（セキュリティのため、この機能をオフにすることはできません）。ログアウトの少し前に画面上で通知が表示されます。":
+        "You will be automatically logged out after a period of inactivity (this cannot be turned off for security reasons). A notice will appear shortly before logout.",
+    "自動ログアウトまでの時間を保存しました。次のページ読み込みから反映されます。":
+        "Auto-logout duration saved. It will apply from the next page load.",
     "デザイン設定": "Design Settings", "カラーテーマ（背景色）": "Color Theme (Background)",
     "フォント": "Font", "UIデザイン": "UI Design",
     "CYAN（デフォルト）": "CYAN (Default)", "GREEN（マトリックス風）": "GREEN (Matrix style)",
@@ -381,7 +386,12 @@ const UI_TRANSLATIONS_EN = {
     "現在のパスワードが正しくありません": "Current password is incorrect",
     "表示名を更新しました": "Display name updated",
     "言語設定を保存しました。次回以降のページ読み込みから反映されます。\nLanguage setting saved. It will apply from the next page load.":
-        "Language setting saved. It will apply from the next page load."
+        "Language setting saved. It will apply from the next page load.",
+    "状態が変更されていません": "Status has not been changed",
+    "状態を更新しました": "Status updated",
+    "パスワードをリセットしました": "Password has been reset",
+    "ログイン失敗回数をリセットしました": "Failed login count has been reset",
+    "しばらく操作が確認できなかったため、自動的にログアウトしました。": "You were automatically logged out due to inactivity."
 
 };
 
@@ -484,10 +494,205 @@ export function isLevel5(member) {
     return Number(member.access_level) === 5;
 }
 
-// ログアウト処理
-export function logout() {
+// access_level 5 (最高権限/FOUNDER) を要求する
+// 権限が無ければ警告してダッシュボードへ戻す
+export function requireLevel5(member) {
+
+    if (!isLevel5(member)) {
+        alert("ACCESS DENIED");
+        location.href = "dashboard.html";
+        throw new Error("ACCESS DENIED");
+    }
+}
+
+// ログアウト処理（明示的ログアウト・自動ログアウト共通）
+// セッション記録のendを更新してからリダイレクトする
+export async function logout(reason) {
+
+    await endSession();
+
     localStorage.removeItem("ARG_MEMBER");
+    clearIdleTimer();
+
+    if (reason === "auto") {
+        localStorage.setItem("ARG_AUTO_LOGOUT_FLAG", "1");
+    }
+
     location.href = "index.html";
+}
+
+
+// =================================
+// セッション記録（オンライン時間の集計用）
+// =================================
+
+// ログイン成功時に呼び出す。セッション開始を記録する
+export async function startSession(member) {
+
+    try {
+
+        const now = new Date();
+        const sessionRef = push(ref(db, "sessions"));
+
+        await set(sessionRef, {
+            member_id: member.member_id,
+            member_name: member.username,
+            start: now.toISOString(),
+            last_seen: now.toISOString(),
+            date: toLocalDateStr(now)
+        });
+
+        localStorage.setItem("ARG_SESSION_ID", sessionRef.key);
+
+    } catch (error) {
+        console.error(error);
+    }
+
+}
+
+// 現在のセッションの最終確認時刻を更新する(定期的なハートビート)
+async function heartbeatSession() {
+
+    const sessionId = localStorage.getItem("ARG_SESSION_ID");
+    if (!sessionId) return;
+
+    try {
+        await update(ref(db, "sessions/" + sessionId), { last_seen: new Date().toISOString() });
+    } catch (error) {
+        console.error(error);
+    }
+
+}
+
+// セッション終了を記録する(ログアウト時)
+async function endSession() {
+
+    const sessionId = localStorage.getItem("ARG_SESSION_ID");
+    if (!sessionId) return;
+
+    try {
+        await update(ref(db, "sessions/" + sessionId), { end: new Date().toISOString() });
+    } catch (error) {
+        console.error(error);
+    }
+
+    localStorage.removeItem("ARG_SESSION_ID");
+
+}
+
+function toLocalDateStr(date) {
+    const p2 = (n) => String(n).padStart(2, "0");
+    return `${date.getFullYear()}-${p2(date.getMonth() + 1)}-${p2(date.getDate())}`;
+}
+
+
+// =================================
+// 自動ログアウト（一定時間操作が無い場合）
+// =================================
+
+// この端末/アカウントの自動ログアウトまでの時間(分)を取得する
+// 0以下やオフは許可しない(必ず1分以上)
+export function getAutoLogoutMinutes() {
+    const value = Number(localStorage.getItem("ARG_AUTO_LOGOUT_MIN"));
+    return (value && value > 0) ? value : 15; // デフォルト15分
+}
+
+export function setAutoLogoutMinutes(minutes) {
+    const safeMinutes = Math.max(1, Number(minutes) || 15);
+    localStorage.setItem("ARG_AUTO_LOGOUT_MIN", String(safeMinutes));
+}
+
+let idleTimerInterval = null;
+let idleLastActivity = Date.now();
+let idleWarningShown = false;
+
+function clearIdleTimer() {
+    if (idleTimerInterval) {
+        clearInterval(idleTimerInterval);
+        idleTimerInterval = null;
+    }
+}
+
+// 自動ログアウトの仕組みを初期化する。ページ読み込み時に一度呼び出す
+export function initIdleTimeout(member) {
+
+    const timeoutMs = getAutoLogoutMinutes() * 60 * 1000;
+    // タイムアウトの1分前(タイムアウトが2分未満の場合は半分の時間)に警告を出す
+    const warnMs = Math.min(60 * 1000, timeoutMs / 2);
+
+    idleLastActivity = Date.now();
+    idleWarningShown = false;
+
+    // 警告モーダルを用意
+    let warningOverlay = document.getElementById("idleWarningOverlay");
+
+    if (!warningOverlay) {
+
+        warningOverlay = document.createElement("div");
+        warningOverlay.id = "idleWarningOverlay";
+        warningOverlay.className = "modal-overlay";
+
+        const isEn = getLang() === "en";
+
+        warningOverlay.innerHTML = isEn ? `
+            <div class="modal-box">
+                <h3>You will be logged out soon</h3>
+                <p>No activity has been detected for a while. You will be automatically logged out in <span id="idleCountdown">--</span> seconds.</p>
+                <button type="button" id="idleContinueButton">Continue session</button>
+            </div>
+        ` : `
+            <div class="modal-box">
+                <h3>まもなく自動ログアウトします</h3>
+                <p>しばらく操作が確認できなかったため、あと <span id="idleCountdown">--</span> 秒 で自動的にログアウトします。</p>
+                <button type="button" id="idleContinueButton">操作を継続する</button>
+            </div>
+        `;
+
+        document.body.appendChild(warningOverlay);
+
+        document.getElementById("idleContinueButton").onclick = () => {
+            resetIdleTimer();
+        };
+
+    }
+
+    const countdownEl = document.getElementById("idleCountdown");
+
+    function resetIdleTimer() {
+        idleLastActivity = Date.now();
+        idleWarningShown = false;
+        warningOverlay.classList.remove("active");
+    }
+
+    ["mousemove", "keydown", "click", "scroll", "touchstart"].forEach((eventName) => {
+        document.addEventListener(eventName, resetIdleTimer, { passive: true });
+    });
+
+    clearIdleTimer();
+
+    idleTimerInterval = setInterval(() => {
+
+        const idleMs = Date.now() - idleLastActivity;
+        const remainingMs = timeoutMs - idleMs;
+
+        if (remainingMs <= 0) {
+
+            clearIdleTimer();
+            logout("auto");
+            return;
+
+        }
+
+        if (remainingMs <= warnMs) {
+
+            idleWarningShown = true;
+            warningOverlay.classList.add("active");
+            countdownEl.textContent = Math.ceil(remainingMs / 1000);
+
+        }
+
+    }, 1000);
+
 }
 
 // innerHTML へ差し込むテキストをエスケープする（XSS対策）
@@ -628,7 +833,7 @@ export function initHeader() {
     hamburgerBtn.id = "hamburgerButton";
     hamburgerBtn.textContent = "☰";
     hamburgerBtn.style.cssText =
-        "width:44px;height:44px;padding:0;position:fixed;top:14px;left:14px;z-index:1001;" +
+        "width:44px;height:44px;padding:0;position:fixed;top:14px;right:14px;z-index:1001;" +
         "font-size:20px;border-radius:50%;";
 
     const overlay = document.createElement("div");
@@ -639,19 +844,23 @@ export function initHeader() {
     const panel = document.createElement("nav");
     panel.id = "navPanel";
     panel.style.cssText =
-        "display:none;position:fixed;top:0;left:0;bottom:0;width:260px;max-width:80vw;" +
-        "background:var(--panel-bg);border-right:1px solid var(--accent);z-index:1000;" +
+        "display:none;position:fixed;top:0;right:0;bottom:0;width:260px;max-width:80vw;" +
+        "background:var(--panel-bg);border-left:1px solid var(--accent);z-index:1000;" +
         "padding:80px 20px 20px;overflow-y:auto;box-sizing:border-box;";
 
     const links = [
         { label: "PROJECTS", href: "projects.html" },
         { label: "THREADS", href: "records.html" },
         { label: "TASKS", href: "tasks.html" },
-        { label: "FILES", href: "files.html" },
         { label: "MAIL", href: "mail.html" },
         { label: "PROFILES", href: "profiles.html" },
         { label: "SETTINGS", href: "settings.html" }
     ];
+
+    // FILES(Cloud Storage利用)は現在準備中のため、access_level 5のみに表示
+    if (member && Number(member.access_level) === 5) {
+        links.push({ label: "FILES（準備中・管理者確認用）", href: "files.html" });
+    }
 
     if (member && Number(member.access_level) >= 4) {
         links.push({ label: "管理画面", href: "admin.html" });
@@ -683,5 +892,18 @@ export function initHeader() {
 
     // 画面の静的テキストを言語設定に応じて翻訳する
     applyI18n();
+
+    // オンライン時間集計用のハートビート(1分ごと)と自動ログアウトタイマーを起動
+    if (member) {
+
+        heartbeatSession();
+
+        if (!window.__argHeartbeatInterval) {
+            window.__argHeartbeatInterval = setInterval(heartbeatSession, 60 * 1000);
+        }
+
+        initIdleTimeout(member);
+
+    }
 
 }

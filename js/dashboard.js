@@ -11,10 +11,99 @@ const member = getLoggedInMember();
 
 initHeader();
 
+// ダッシュボードでは右側の「日時」パネルに時計を表示するため、
+// ヘッダー内の簡易時計(共通部品)は重複するので非表示にする
+const headerClock = document.getElementById("headerClock");
+if (headerClock) headerClock.remove();
+
 document.getElementById("username").textContent = member.username;
 document.getElementById("memberID").textContent = member.member_id;
 document.getElementById("accessLevel").textContent = member.access_level;
 document.getElementById("status").textContent = member.status;
+
+
+// =================================
+// 日時パネル（リアルタイム時計 + カレンダー）
+// =================================
+
+const dashboardClock = document.getElementById("dashboardClock");
+const DOW = ["日", "月", "火", "水", "木", "金", "土"];
+
+function updateDashboardClock() {
+
+    const now = new Date();
+    const p2 = (n) => String(n).padStart(2, "0");
+
+    dashboardClock.textContent =
+        `${now.getFullYear()}/${p2(now.getMonth() + 1)}/${p2(now.getDate())}` +
+        `(${DOW[now.getDay()]}) ${p2(now.getHours())}:${p2(now.getMinutes())}:${p2(now.getSeconds())}`;
+
+}
+
+updateDashboardClock();
+setInterval(updateDashboardClock, 1000);
+
+
+let calYear = new Date().getFullYear();
+let calMonth = new Date().getMonth(); // 0-11
+
+const calHeader = document.getElementById("calHeader");
+const calGrid = document.getElementById("dashboardCalendarGrid");
+
+function renderDashboardCalendar() {
+
+    calHeader.textContent = `${calYear}年 ${calMonth + 1}月`;
+
+    calGrid.innerHTML = "";
+
+    DOW.forEach((d) => {
+        const el = document.createElement("div");
+        el.className = "calendar-dow";
+        el.textContent = d;
+        calGrid.appendChild(el);
+    });
+
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+
+    const firstDay = new Date(calYear, calMonth, 1);
+    const startWeekday = firstDay.getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+    for (let i = 0; i < startWeekday; i++) {
+        const el = document.createElement("div");
+        el.className = "calendar-day outside";
+        calGrid.appendChild(el);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+
+        const el = document.createElement("div");
+        el.className = "calendar-day";
+        el.style.cursor = "default";
+        el.textContent = d;
+
+        if (`${calYear}-${calMonth}-${d}` === todayStr) el.classList.add("today");
+
+        calGrid.appendChild(el);
+
+    }
+
+}
+
+document.getElementById("calPrevMonth").onclick = () => {
+    calMonth--;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderDashboardCalendar();
+};
+
+document.getElementById("calNextMonth").onclick = () => {
+    calMonth++;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderDashboardCalendar();
+};
+
+renderDashboardCalendar();
 
 
 // =================================

@@ -16,9 +16,10 @@ import {
     deleteObject
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
-import { getLoggedInMember, initHeader, logSystemAction, tx } from "./common.js";
+import { getLoggedInMember, initHeader, logSystemAction, tx, requireLevel5 } from "./common.js";
 
 const member = getLoggedInMember();
+requireLevel5(member); // FILES機能は現在準備中のため、access_level 5のみ利用可能
 
 initHeader();
 

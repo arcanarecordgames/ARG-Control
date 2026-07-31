@@ -10,9 +10,10 @@ import {
     get
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-import { getLoggedInMember, initHeader, escapeHTML } from "./common.js";
+import { getLoggedInMember, initHeader, requireLevel5, escapeHTML } from "./common.js";
 
 const member = getLoggedInMember();
+requireLevel5(member); // FILES機能は現在準備中のため、access_level 5のみ利用可能
 
 initHeader();
 

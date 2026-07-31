@@ -538,3 +538,113 @@ textarea:focus {
     font-size: 11px;
     flex-shrink: 0;
 }
+
+/* ===== Dashboard: NEWS + 日時 の2カラムレイアウト ===== */
+
+.dashboard-news-row {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.dashboard-news-col,
+.dashboard-datetime-col {
+    flex: 1 1 300px;
+    min-width: 260px;
+}
+
+.dashboard-clock {
+    font-size: 22px;
+    text-align: center;
+    padding: 14px 0;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--card-bg);
+    letter-spacing: 1px;
+}
+
+/* ===== 確認モーダル ===== */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-box {
+    background: var(--panel-bg);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 30px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 0 25px rgba(var(--accent-rgb),0.4);
+}
+
+.modal-box h3 {
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+    margin-top: 0;
+}
+
+.modal-box p {
+    line-height: 1.8;
+}
+
+.modal-box button {
+    margin-top: 15px;
+}
+
+/* ===== オンライン時間グラフ ===== */
+
+.chart-area {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 220px;
+    border-bottom: 1px solid var(--accent);
+    border-left: 1px solid var(--accent);
+    padding: 10px 10px 0 10px;
+    overflow-x: auto;
+}
+
+.chart-bar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 26px;
+    height: 100%;
+}
+
+.chart-bar {
+    width: 18px;
+    background: var(--accent);
+    border-radius: var(--radius) var(--radius) 0 0;
+    min-height: 2px;
+    transition: height 0.3s;
+}
+
+.chart-bar-value {
+    font-size: 10px;
+    opacity: 0.8;
+    margin-bottom: 4px;
+    white-space: nowrap;
+}
+
+.chart-bar-label {
+    font-size: 10px;
+    opacity: 0.7;
+    margin-top: 6px;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+}

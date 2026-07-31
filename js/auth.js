@@ -14,7 +14,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 import { hashPassword } from "./security.js";
-import { applySavedTheme, applyI18n } from "./common.js";
+import { applySavedTheme, applyI18n, startSession, tx } from "./common.js";
 
 // この端末に記憶されているテーマを適用（未ログインでも見た目を統一するため）
 applySavedTheme();
@@ -27,6 +27,16 @@ if (memberNumberInput) {
     memberNumberInput.oninput = () => {
         memberNumberInput.value = memberNumberInput.value.replace(/[^0-9]/g, "");
     };
+}
+
+// 自動ログアウトで送還されてきた場合、その旨を知らせる
+if (localStorage.getItem("ARG_AUTO_LOGOUT_FLAG")) {
+
+    localStorage.removeItem("ARG_AUTO_LOGOUT_FLAG");
+
+    const messageEl = document.getElementById("message");
+    if (messageEl) messageEl.innerHTML = tx("しばらく操作が確認できなかったため、自動的にログアウトしました。");
+
 }
 
 
@@ -183,6 +193,8 @@ window.login = async function () {
         }
 
         localStorage.setItem("ARG_MEMBER", JSON.stringify(member));
+
+        await startSession(member);
 
         location.href = "dashboard.html";
 
