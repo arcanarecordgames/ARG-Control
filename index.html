@@ -24,7 +24,10 @@
 <p class="status">SYSTEM ONLINE</p>
 
 <label>Member ID</label>
-<input type="text" id="memberID" placeholder="ARG-00001" autocomplete="username">
+<div style="display:flex;align-items:center;gap:8px;margin:10px 0 20px;">
+<span style="font-size:16px;white-space:nowrap;">ARG-</span>
+<input type="text" id="memberNumber" placeholder="00001" inputmode="numeric" pattern="[0-9]*" maxlength="5" style="margin:0;">
+</div>
 
 <label>Password</label>
 <input type="password" id="password" placeholder="PASSWORD" autocomplete="current-password">

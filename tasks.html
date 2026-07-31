@@ -20,13 +20,18 @@ STATUS : <span>ONLINE</span>
 </div>
 </header>
 
+<button onclick="location.href='dashboard.html'" style="width:auto;padding:8px 16px;margin-bottom:20px;">← BACK TO DASHBOARD</button>
+
 <section class="member-table">
 <h2>CALENDAR</h2>
 
-<div class="calendar-header">
-<button id="prevMonth">&lt; PREV</button>
+<div class="calendar-top-row">
 <h3 id="calendarHeader">-</h3>
-<button id="nextMonth">NEXT &gt;</button>
+<button id="newButton" style="width:auto;">＋ NEW TASK</button>
+</div>
+<div class="calendar-nav-row">
+<button id="prevMonth" style="width:auto;">&lt; PREV</button>
+<button id="nextMonth" style="width:auto;">NEXT &gt;</button>
 </div>
 
 <div class="calendar-grid" id="calendarGrid"></div>
@@ -35,8 +40,6 @@ STATUS : <span>ONLINE</span>
 
 <section class="member-table">
 <h2>TASK LIST</h2>
-
-<button id="newButton" style="margin-bottom:20px;">NEW TASK</button>
 
 <p>
 <span id="filterLabel">すべてのタスク</span>

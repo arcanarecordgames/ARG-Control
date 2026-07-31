@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARG Control | Mail</title>
+<title>ARG Control | Profiles</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -14,28 +14,25 @@
 
 <header class="admin-header">
 <h1>ARG Control</h1>
-<p>MAIL SYSTEM</p>
+<p>PROFILE LIST</p>
 <div class="system-status">
 STATUS : <span>ONLINE</span>
 </div>
 </header>
 
-<section class="member-table">
-<h2>MAIL BOX</h2>
+<button onclick="location.href='dashboard.html'" style="width:auto;padding:8px 16px;margin-bottom:20px;">← BACK TO DASHBOARD</button>
 
-<button onclick="location.href='dashboard.html'" style="width:auto;padding:8px 16px;margin-bottom:15px;">← BACK TO DASHBOARD</button>
-<br>
-<button id="composeButton" style="display:none;margin-bottom:20px;">NEW MAIL</button>
+<section class="member-table">
+<h2>プロフィール一覧</h2>
 
 <table>
 <tr>
-<th>FROM</th>
-<th>SUBJECT</th>
-<th>DATE</th>
-<th>STATUS</th>
+<th>USERNAME</th>
+<th>MID</th>
+<th>担当</th>
 </tr>
-<tbody id="mailList">
-<tr><td colspan="4">LOADING...</td></tr>
+<tbody id="profileList">
+<tr><td colspan="3">LOADING...</td></tr>
 </tbody>
 </table>
 </section>
@@ -47,7 +44,7 @@ STATUS : <span>ONLINE</span>
 
 </div>
 
-<script type="module" src="js/mail.js"></script>
+<script type="module" src="js/profiles.js"></script>
 
 </body>
 
