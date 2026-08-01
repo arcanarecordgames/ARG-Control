@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARG Control | Edit Member</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<header class="admin-header">
+<h1>ARG Control</h1>
+<p>MEMBER EDIT SYSTEM</p>
+<div class="system-status">
+STATUS : <span>ONLINE</span>
+</div>
+</header>
+
+<section class="register-box">
+<h2>EDIT MEMBER</h2>
+
+<label>USERNAME</label>
+<input type="text" id="username">
+
+<label>ACCESS LEVEL</label>
+<select id="accessLevel">
+<option value="5">5 - ADMIN</option>
+<option value="4">4 - MANAGER</option>
+<option value="3">3 - STAFF</option>
+<option value="2">2 - MEMBER</option>
+<option value="1">1 - GUEST</option>
+</select>
+
+<button id="updateButton">UPDATE MEMBER</button>
+
+</section>
+
+<footer>
+<p>ARG CONTROL SYSTEM</p>
+<p>ADMINISTRATOR ACCESS ONLY</p>
+</footer>
+
+</div>
+
+<script type="module" src="js/member-edit.js"></script>
+
+</body>
+
+</html>

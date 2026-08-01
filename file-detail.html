@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARG Control | File Detail</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<header class="admin-header">
+<h1>ARG Control</h1>
+<p>FILE DETAIL</p>
+<div class="system-status">
+STATUS : <span>ONLINE</span>
+</div>
+</header>
+
+<section class="register-box">
+
+<p>NAME : <span id="name">-</span></p>
+<p>UPLOADER : <span id="uploader">-</span></p>
+<p>DATE : <span id="date">-</span></p>
+<p>SIZE : <span id="size">-</span></p>
+<p>DESCRIPTION : <span id="description">-</span></p>
+
+<hr>
+
+<div class="preview-area" id="previewArea">LOADING...</div>
+
+<br>
+
+<a id="downloadLink" href="#" target="_blank" rel="noopener">
+<button type="button">DOWNLOAD</button>
+</a>
+
+<div id="deleteArea" style="display:none;margin-top:10px;">
+<button id="deleteButton">DELETE</button>
+</div>
+
+<br>
+
+<button onclick="location.href='files.html'">BACK TO FILE LIST</button>
+
+</section>
+
+<footer>
+<p>ARG CONTROL SYSTEM</p>
+<p>AUTHORIZED ACCESS ONLY</p>
+</footer>
+
+</div>
+
+<script type="module" src="js/file-detail.js"></script>
+
+</body>
+
+</html>
