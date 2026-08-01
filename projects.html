@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARG Control | Projects</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<header class="admin-header">
+<h1>ARG Control</h1>
+<p>PROJECT SYSTEM</p>
+<div class="system-status">
+STATUS : <span>ONLINE</span>
+</div>
+</header>
+
+<section class="member-table">
+<h2>PROJECT PROPOSALS</h2>
+
+<button onclick="location.href='dashboard.html'" style="width:auto;padding:8px 16px;margin-bottom:15px;">← BACK TO DASHBOARD</button>
+<br>
+<button id="newButton" style="margin-bottom:20px;">NEW PROJECT</button>
+
+<table>
+<tr>
+<th>TITLE</th>
+<th>AUTHOR</th>
+<th>DATE</th>
+</tr>
+<tbody id="projectList">
+<tr><td colspan="3">LOADING...</td></tr>
+</tbody>
+</table>
+</section>
+
+<footer>
+<p>ARG CONTROL SYSTEM</p>
+<p>AUTHORIZED ACCESS ONLY</p>
+</footer>
+
+</div>
+
+<script type="module" src="js/projects.js"></script>
+
+</body>
+
+</html>

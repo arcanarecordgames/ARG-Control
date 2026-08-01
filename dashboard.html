@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARG Control | Dashboard</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+<header class="dashboard-header">
+<div>
+<h1>ARG Control</h1>
+<p>Arcana Record Games Internal System</p>
+</div>
+<div class="system-status">
+STATUS : <span>ONLINE</span>
+</div>
+</header>
+
+<section class="member-panel" id="announcementSection" style="display:none;">
+<h2>ANNOUNCEMENT</h2>
+<p id="announcementText" style="white-space:pre-wrap;"></p>
+</section>
+
+<section class="member-panel">
+<div class="dashboard-news-row">
+
+<div class="dashboard-news-col">
+<h2>NEWS</h2>
+<div id="newsList" class="news-scroll">
+<p style="opacity:0.6;">LOADING...</p>
+</div>
+</div>
+
+<div class="dashboard-datetime-col">
+<h2>日時</h2>
+<div id="dashboardClock" class="dashboard-clock">-</div>
+
+<div class="calendar-header" style="margin-top:15px;">
+<button id="calPrevMonth" style="width:auto;padding:6px 12px;">&lt;</button>
+<h3 id="calHeader" style="margin:0;font-size:15px;">-</h3>
+<button id="calNextMonth" style="width:auto;padding:6px 12px;">&gt;</button>
+</div>
+<div class="calendar-grid" id="dashboardCalendarGrid"></div>
+</div>
+
+</div>
+</section>
+
+<section class="control-panel">
+<h2>OFFICIAL LINKS</h2>
+
+<div class="menu-grid">
+
+<div class="menu-card" onclick="window.open('https://arcanarecordgames.com','_blank')">
+<h3>🌐 公式サイト</h3>
+<p>Official Website</p>
+</div>
+
+<div class="menu-card" onclick="window.open('https://x.com/arcanarecord','_blank')">
+<h3>🐦 公式X</h3>
+<p>Official X (Twitter)</p>
+</div>
+
+<div class="menu-card" onclick="window.open('https://youtube.com/@arcanarecord','_blank')">
+<h3>▶️ 公式YouTube</h3>
+<p>Official YouTube</p>
+</div>
+
+</div>
+</section>
+
+<section class="member-panel">
+<h2>MEMBER INFORMATION</h2>
+<div class="member-data">
+<p>USERNAME : <span id="username">-</span></p>
+<p>MID : <span id="memberID">-</span></p>
+<p>ACCESS LEVEL : <span id="accessLevel">-</span></p>
+<p>STATUS : <span id="status">-</span></p>
+</div>
+</section>
+
+<footer>
+<p>ARG CONTROL SYSTEM</p>
+<p>AUTHORIZED ACCESS ONLY</p>
+</footer>
+
+</div>
+
+<script type="module" src="js/dashboard.js"></script>
+
+</body>
+
+</html>
