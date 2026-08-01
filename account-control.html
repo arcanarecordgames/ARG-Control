@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARG Control | Account Control</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<header class="admin-header">
+<h1>ARG Control</h1>
+<p>ACCOUNT CONTROL SYSTEM</p>
+<div class="system-status">
+STATUS : <span>ONLINE</span>
+</div>
+</header>
+
+<button onclick="location.href='admin.html'" style="width:auto;padding:8px 16px;margin-bottom:20px;">← BACK TO 管理画面</button>
+
+<section class="register-box">
+<h2>アカウント管理</h2>
+<p style="font-size:12px;opacity:0.7;">メンバーリストや権限編集に含まれない、アカウント個別の詳細設定を行う画面です。状態（ACTIVE/LOCKED/SUSPENDED）の変更はメンバーリスト画面から行えます。</p>
+
+<label>対象メンバー</label>
+<select id="memberSelect">
+<option value="">選択してください</option>
+</select>
+
+</section>
+
+<section class="register-box" id="detailArea" style="display:none;">
+
+<h2>アカウント詳細</h2>
+
+<p>MID : <span id="detailMID">-</span></p>
+<p>ユーザー名 : <span id="detailUsername">-</span></p>
+<p>権限レベル : <span id="detailLevel">-</span></p>
+<p>状態 : <span id="detailStatus">-</span></p>
+<p>登録日 : <span id="detailCreatedAt">-</span></p>
+<p>ログイン失敗回数 : <span id="detailFailCount">-</span></p>
+
+<hr>
+
+<h3 style="border-left:4px solid var(--accent);padding-left:12px;">パスワードの強制リセット</h3>
+<p style="font-size:12px;opacity:0.7;">本人がパスワードを忘れた場合などに、管理者が新しいパスワードを直接設定できます。</p>
+
+<label>新しいパスワード</label>
+<input type="password" id="newPasswordInput" placeholder="新しいパスワード">
+<button id="resetPasswordButton">パスワードをリセット</button>
+
+<hr>
+
+<h3 style="border-left:4px solid var(--accent);padding-left:12px;">ログイン失敗回数のリセット</h3>
+<p style="font-size:12px;opacity:0.7;">システム設定で自動ロックの閾値を設定している場合、誤操作でロックされる寸前のカウントをリセットできます（状態そのものは変更しません）。</p>
+
+<button id="resetFailCountButton">失敗回数をリセット</button>
+
+</section>
+
+<footer>
+<p>ARG CONTROL SYSTEM</p>
+<p>ADMINISTRATOR ACCESS ONLY</p>
+</footer>
+
+</div>
+
+<script type="module" src="js/account-control.js"></script>
+
+</body>
+
+</html>

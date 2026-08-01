@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARG Control | Permissions</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="admin-container">
+
+<header class="admin-header">
+<h1>ARG Control</h1>
+<p>PERMISSION MANAGEMENT</p>
+<div class="system-status">
+STATUS : <span>ONLINE</span>
+</div>
+</header>
+
+<button onclick="location.href='admin.html'" style="width:auto;padding:8px 16px;margin-bottom:20px;">← BACK TO 管理画面</button>
+
+<section class="admin-menu">
+<h2>権限レベル別メンバー一覧</h2>
+<p style="font-size:12px;opacity:0.7;">ユーザー名をクリックすると、メンバーリストからMIDを押した時と同じ詳細画面に移動します。</p>
+
+<div class="admin-grid" id="levelGrid">
+<p>LOADING...</p>
+</div>
+
+</section>
+
+<footer>
+<p>ARG CONTROL SYSTEM</p>
+<p>ADMINISTRATOR ACCESS ONLY</p>
+</footer>
+
+</div>
+
+<script type="module" src="js/permissions.js"></script>
+
+</body>
+
+</html>
